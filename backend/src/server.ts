@@ -62,7 +62,7 @@ const cert = fs.readFileSync('./certs/localhost.pem')
 
 app.use('/api/users', usersRouter)
 app.use('/api/auth', authRouter);
-app.use('/api/users', usersRouter); // protégé
+app.use('/api/users', usersRouter); 
 app.use('/api/admin', verifyToken, requireAdmin, (req, res) => {
 res.json({ message: 'Bienvenue admin' });
 })
