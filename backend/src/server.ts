@@ -36,19 +36,12 @@ next();
 app.use(morgan('dev')) // Log des requêtes : Visualiser le flux de requêtes entre Angular et Express
 app.use(express.json())
 app.use(cookieParser())
-// Configuration CORS : autoriser le front Angular en HTTPS local
+// Configuration CORS : autoriser le front Angular en HTTP et HTTPS local
 app.use(cors({
-origin: 'https://localhost:4200',
+origin: ['https://localhost:4200', 'http://localhost:4200'],
 credentials: true,
-methods: ['GET', 'POST', 'PUT', 'DELETE'],
-allowedHeaders: ['Content-Type', 'Authorization']
-}))
-
-
-app.use(cors({
-origin: 'http://localhost:4200', // origine autorisée (Angular)
-credentials: true, // permet les cookies cross-origin
 methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 

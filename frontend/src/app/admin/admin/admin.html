@@ -1,0 +1,44 @@
+<div class="admin-container">
+  <h1> Admin page</h1>
+  
+  <div class="users-section">
+    <h2>Liste des utilisateurs</h2>
+    
+    <!-- Si aucun utilisateur -->
+    <div  class="no-users">
+        @if (users().length === 0) {
+      <p>Pas d'utilisateurs</p>
+        }
+    </div>
+    
+    <!-- Liste des utilisateurs -->
+    <div  class="users-list">
+        @if (users().length > 0) {
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Login</th>
+            <th>Rôle</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for(user of users(); track user.id) {
+          <tr>
+            
+            <td>{{ user.id }}</td>
+            <td>{{ user.login }}</td>
+            <td>
+              <span [class.badge-admin]="user.role === 'admin'" 
+                    [class.badge-user]="user.role === 'user'">
+                {{ user.role }}
+              </span>
+            </td>
+          </tr>
+            }
+        </tbody>
+      </table>
+        }
+    </div>
+  </div>
+</div>
