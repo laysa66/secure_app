@@ -36,12 +36,12 @@ build/
 */dist/
 */build/
 
-# Cookies de test (à ignorer)
+# Cookies de test 
 cookies.txt
 cookies_admin.txt
 cookies_user.txt
 
-# Certificates (décommentez si vous ne voulez pas les versionner)
+# Certificates 
 # certs/
 # *.pem
 # backend/certs/
