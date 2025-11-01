@@ -4,13 +4,13 @@ import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
-import publicRouter from './routes/public.ts'
-import { ensureAdmin } from '../db/initAdmin.ts'
-import usersRouter from '../src/routes/users.ts'
+import publicRouter from './routes/public.js'
+import { ensureAdmin } from './db/initAdmin.js'
+import usersRouter from './routes/users.js'
 import 'dotenv/config'
-import authRouter from './routes/auth.ts'
-import { verifyToken } from './middleware/token-management.ts'
-import { requireAdmin } from './middleware/auth-admin.ts'
+import authRouter from './routes/auth.js'
+import { verifyToken } from './middleware/token-management.js'
+import { requireAdmin } from './middleware/auth-admin.js'
 
 
 
@@ -38,7 +38,8 @@ app.use(express.json())
 app.use(cookieParser())
 // Configuration CORS : autoriser le front Angular en HTTP et HTTPS local
 app.use(cors({
-origin: ['https://localhost:4200', 'http://localhost:4200'],
+//origin: ['https://localhost:4200', 'http://localhost:4200'],
+origin: process.env.FRONTEND_URL || 'http://localhost:8080',
 credentials: true,
 methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 allowedHeaders: ['Content-Type', 'Authorization']
@@ -49,7 +50,7 @@ allowedHeaders: ['Content-Type', 'Authorization']
 
 // Routes publiques
 app.use('/api/public', publicRouter)
-// Chargement du certificat et clé générés par mkcert (étape 0)
+// Chargement du certificat et clé générés par mkcert 
 const key = fs.readFileSync('./certs/localhost-key.pem')
 const cert = fs.readFileSync('./certs/localhost.pem')
 
@@ -58,6 +59,10 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter); 
 app.use('/api/admin', verifyToken, requireAdmin, (req, res) => {
 res.json({ message: 'Bienvenue admin' });
+})
+// Route de health check pour Docker
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok' })
 })
 
 // Lancement du serveur HTTPS

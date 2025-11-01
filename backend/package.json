@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p tsconfig.json --pretty false --noEmitOnError"
   },
   "keywords": [],
   "author": "",

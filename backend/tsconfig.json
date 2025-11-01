@@ -1,49 +1,36 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
-
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
+    /* === File Layout === */
+    "rootDir": "./src",
+    "outDir": "./dist",
+    
+    /* === Module System === */
+    "target": "es2022",
+    "lib": ["es2022"],
     "module": "nodenext",
-    "target": "esnext",
-    "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
-
-    // Other Outputs
+    "moduleResolution": "nodenext",
+    "verbatimModuleSyntax": true,
+    
+    /* === Compatibilité Node ESM === */
+    "types": ["node"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    
+    /* === Compilation === */
+    "noEmit": false,
     "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-
-    // Stricter Typechecking Options
+    "skipLibCheck": true,
+    
+    /* === Sécurité et style === */
+    "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
-
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
-    "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
     "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true,
-
-    "types": ["node"], // rajoutez "node"
-    "moduleResolution": "nodenext", // à rajoute      
-    "allowImportingTsExtensions": true, // à rajouter
-    "noEmit": true, 
-  }
+    "noImplicitOverride": true,
+    "noUncheckedSideEffectImports": true,
+    "noImplicitAny": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
